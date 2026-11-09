@@ -7,6 +7,7 @@ Aplicación web en español para organizar **varias revisiones sistemáticas**, 
 - Varias revisiones, cada una con pregunta, periodo, criterios y variables SES propios.
 - Registro de cadenas de búsqueda, bases, fechas, filtros y número declarado de resultados.
 - Importación de referencias bibliográficas **CSV, RIS y BibTeX**; alta manual de referencias.
+- En Cribado → Nuevo registro, introduce un DOI o enlace doi.org y pulsa **Completar desde DOI**. Consulta Crossref y completa los campos vacíos; algunos DOI no están registrados allí y muchos no incluyen resumen. Se conservan los campos manuales.
 - Detección de **posibles** duplicados por DOI o título/año; confirmar en cribado.
 - Cribado por título/resumen y texto completo, con estados Pendiente / Incluir / Excluir / Dudoso y códigos de exclusión configurables.
 - Matriz de extracción SES editable y gráficos de frecuencias por categoría, metodología y año.
@@ -82,7 +83,7 @@ npm test
 npm run build
 ```
 
-El workflow ejecuta las pruebas antes de compilar y desplegar. El código está publicado en `franherreraneira/prisma-research-manager`. Para activar el sitio, el propietario debe seleccionar **Settings → Pages → Source → GitHub Actions**: la integración disponible no dispone de permisos para crear el sitio de Pages (HTTP 403). Tras activarlo, ejecutar de nuevo el workflow de despliegue.
+El workflow ejecuta las pruebas antes de compilar y desplegar. Publicado en https://franherreraneira.github.io/prisma-research-manager/ con GitHub Pages y despliegue automático desde `main`.
 
 Correcciones respecto del ZIP original: los posibles duplicados aparecen en el listado para revisarlos; cambiar una inclusión a otra decisión limpia el estado de texto completo; la extracción y Excel requieren inclusión válida en ambas etapas y texto recuperado.
 
