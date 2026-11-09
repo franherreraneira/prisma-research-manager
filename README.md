@@ -10,6 +10,7 @@ Aplicación web en español para organizar **varias revisiones sistemáticas**, 
 - En Cribado → Nuevo registro, introduce un DOI o enlace doi.org y pulsa **Completar desde DOI**. Consulta Crossref y completa los campos vacíos. Si falta el abstract, busca en OpenAlex por el mismo DOI y reconstruye su texto. Informa la fuente del abstract o su ausencia; no todos los DOI tienen resumen disponible. Se conservan los campos manuales.
 - Detección de **posibles** duplicados por DOI o título/año; confirmar en cribado.
 - Cribado por título/resumen y texto completo, con estados Pendiente / Incluir / Excluir / Dudoso y códigos de exclusión configurables.
+- Selección múltiple en Cribado: casillas individuales, seleccionar todos los resultados del filtro actual y eliminar seleccionados con confirmación. La selección se limpia al cambiar de filtro, pestaña o revisión.
 - Matriz de extracción SES editable y gráficos de frecuencias por categoría, metodología y año.
 - Exportación **SVG/PNG** del diagrama de flujo PRISMA simplificado, y **XLSX** con siete hojas.
 - Respaldo/restauración de todas las revisiones en **JSON**.
