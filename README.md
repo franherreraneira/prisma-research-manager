@@ -4,6 +4,9 @@ Aplicación web en español para organizar **varias revisiones sistemáticas**, 
 
 ## Funcionalidades
 
+- Tercera pestaña **Manuscrito**: seis plantillas orientativas (artículo original o revisión sistemática para Marine Policy, Energy Research & Social Science y Ecology and Society), campos editables por sección, borradores independientes por revista/tipo, conteo de palabras y exportación Markdown. El respaldo JSON incluye los borradores. Las plantillas no sustituyen las guías editoriales: se enlazan las fuentes oficiales y se distingue el caso Synthesis de Ecology and Society.
+
+
 - Varias revisiones, cada una con pregunta, periodo, criterios y variables SES propios.
 - Registro de cadenas de búsqueda, bases, fechas, filtros y número declarado de resultados.
 - Importación de referencias bibliográficas **CSV, RIS y BibTeX**; alta manual de referencias. CSV reconoce encabezados de Scopus, Web of Science y español (Title/Article Title/Título, Authors/Author Full Names/Autores, Year/Publication Year/Año, DOI y Abstract/Resumen). Acepta coma, punto y coma y tabulaciones; UTF-8, UTF-16 con BOM y Windows-1252. Las filas deben tener título o DOI. Se informa si el formato o las columnas no son válidos.
