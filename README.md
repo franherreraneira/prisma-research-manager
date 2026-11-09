@@ -4,7 +4,7 @@ Aplicación web en español para organizar **varias revisiones sistemáticas**, 
 
 ## Funcionalidades
 
-- Tercera pestaña **Manuscrito**: seis plantillas orientativas (artículo original o revisión sistemática para Marine Policy, Energy Research & Social Science y Ecology and Society), campos editables por sección, borradores independientes por revista/tipo, conteo de palabras y exportación Markdown. El respaldo JSON incluye los borradores. Las plantillas no sustituyen las guías editoriales: se enlazan las fuentes oficiales y se distingue el caso Synthesis de Ecology and Society.
+- Tercera pestaña **Manuscrito**: seis plantillas orientativas (artículo original o revisión sistemática para Marine Policy, Energy Research & Social Science y Ecology and Society), campos editables por sección, borradores independientes por revista/tipo, conteo de palabras y exportación Word (.docx) o Markdown. El respaldo JSON incluye los borradores. Las plantillas no sustituyen las guías editoriales: se enlazan las fuentes oficiales y se distingue el caso Synthesis de Ecology and Society.
 
 
 - Varias revisiones, cada una con pregunta, periodo, criterios y variables SES propios.

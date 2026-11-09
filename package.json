@@ -10,6 +10,7 @@
     "test": "playwright test"
   },
   "dependencies": {
+    "docx": "^9.15.3",
     "exceljs": "^4.4.0",
     "idb": "^8.0.3",
     "lucide-react": "^0.468.0",
