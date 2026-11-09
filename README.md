@@ -49,7 +49,7 @@ git remote add origin https://github.com/TU_USUARIO/prisma-research-manager.git
 git push -u origin main
 ```
 
-Sustituye `TU_USUARIO` por tu cuenta y crea antes el repositorio remoto. No se ha creado ni publicado un repositorio desde este paquete.
+Sustituye `TU_USUARIO` por tu cuenta y crea antes el repositorio remoto. Repositorio del proyecto: https://github.com/franherreraneira/prisma-research-manager.
 
 ## Flujo de trabajo sugerido
 
@@ -82,7 +82,7 @@ npm test
 npm run build
 ```
 
-El workflow ejecuta las pruebas antes de compilar y desplegar. La publicación remota queda pendiente hasta crear el repositorio y activar Pages con GitHub Actions; la integración disponible no permite crear repositorios (`Resource not accessible by integration`).
+El workflow ejecuta las pruebas antes de compilar y desplegar. El código está publicado en `franherreraneira/prisma-research-manager`. Para activar el sitio, el propietario debe seleccionar **Settings → Pages → Source → GitHub Actions**: la integración disponible no dispone de permisos para crear el sitio de Pages (HTTP 403). Tras activarlo, ejecutar de nuevo el workflow de despliegue.
 
 Correcciones respecto del ZIP original: los posibles duplicados aparecen en el listado para revisarlos; cambiar una inclusión a otra decisión limpia el estado de texto completo; la extracción y Excel requieren inclusión válida en ambas etapas y texto recuperado.
 
