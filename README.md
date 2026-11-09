@@ -4,7 +4,7 @@ Aplicación web en español para organizar **varias revisiones sistemáticas**, 
 
 ## Funcionalidades
 
-- Tercera pestaña **Manuscrito** centrada en revisión sistemática para **Ecology and Society**. Estructura desglosada de métodos y resultados por preguntas; plan editable de seis figuras (PRISMA, Sankey, comparaciones, dimensiones, sunburst y tensiones/aportes), Word y Markdown. La estructura visual se inspira en el PDF aportado de Socrate y colegas, publicado en **Ambio** (2026), DOI 10.1007/s13280-025-02299-2; no es un artículo de Ecology and Society. El plan no genera automáticamente nuevos diagramas. Los borradores anteriores se conservan en el respaldo JSON; se prioriza el borrador Ecology/revisión existente o se retoma el anterior activo. Se enlazan las guías oficiales y se distingue el encaje de Synthesis.
+- Tercera pestaña **Manuscrito** centrada en revisión sistemática para **Ecology and Society**. Modelos principales: Lasseur, Holstead y Huitema (2025), DOI 10.5751/ES-16390-300336, y Wintergalen y colegas (2022), DOI 10.5751/ES-13471-270346. Ambos publicados como Research. Métodos de búsqueda, selección y codificación explícitos; resultados por ejes conceptuales; plan de figuras y tablas con fuentes y páginas. Ambio/Socrate (DOI 10.1007/s13280-025-02299-2) queda como referencia visual complementaria para Sankey y sunburst. El plan se exporta a Word/Markdown, sin generar nuevos diagramas automáticamente. Se conservan texto y planes anteriores; todo se incluye en el respaldo JSON.
 
 
 - Varias revisiones, cada una con pregunta, periodo, criterios y variables SES propios.
