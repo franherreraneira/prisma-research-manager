@@ -30,6 +30,7 @@ test('importación, cribado, SES, persistencia y exportaciones',async({page})=>{
  await row.locator('select').nth(0).selectOption('Explícito');
  await row.locator('select').nth(1).selectOption('Mixta');
  await row.locator('input[type=checkbox]').first().check();
+ await expect.poll(()=>page.evaluate(async()=>{const db=await new Promise((resolve,reject)=>{const req=indexedDB.open('prisma-research-manager',1);req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)});try{return await new Promise((resolve,reject)=>{const req=db.transaction('state').objectStore('state').get('main');req.onsuccess=()=>{const state=req.result;resolve(state?.projects.find(p=>p.id===state.active)?.records.find(r=>r.title==='Estudio CSV'&&!r.duplicateOf)?.codes.includes('social'))};req.onerror=()=>reject(req.error)})}finally{db.close()}})).toBe(true);
  await page.reload();await page.getByRole('button',{name:'Extracción SES',exact:true}).click();
  await expect(page.locator('tbody tr select').first()).toHaveValue('Explícito');
  await expect(page.locator('tbody input[type=checkbox]').first()).toBeChecked();
