@@ -4,7 +4,7 @@ Aplicación web en español para organizar **varias revisiones sistemáticas**, 
 
 ## Funcionalidades
 
-- Tercera pestaña **Manuscrito**: seis plantillas orientativas (artículo original o revisión sistemática para Marine Policy, Energy Research & Social Science y Ecology and Society), campos editables por sección, borradores independientes por revista/tipo, conteo de palabras y exportación Word (.docx) o Markdown. El respaldo JSON incluye los borradores. Las plantillas no sustituyen las guías editoriales: se enlazan las fuentes oficiales y se distingue el caso Synthesis de Ecology and Society.
+- Tercera pestaña **Manuscrito** centrada en revisión sistemática para **Ecology and Society**. Estructura desglosada de métodos y resultados por preguntas; plan editable de seis figuras (PRISMA, Sankey, comparaciones, dimensiones, sunburst y tensiones/aportes), Word y Markdown. La estructura visual se inspira en el PDF aportado de Socrate y colegas, publicado en **Ambio** (2026), DOI 10.1007/s13280-025-02299-2; no es un artículo de Ecology and Society. El plan no genera automáticamente nuevos diagramas. Los borradores anteriores se conservan en el respaldo JSON; se prioriza el borrador Ecology/revisión existente o se retoma el anterior activo. Se enlazan las guías oficiales y se distingue el encaje de Synthesis.
 
 
 - Varias revisiones, cada una con pregunta, periodo, criterios y variables SES propios.
