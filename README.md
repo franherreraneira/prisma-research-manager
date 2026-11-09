@@ -7,7 +7,7 @@ Aplicación web en español para organizar **varias revisiones sistemáticas**, 
 - Varias revisiones, cada una con pregunta, periodo, criterios y variables SES propios.
 - Registro de cadenas de búsqueda, bases, fechas, filtros y número declarado de resultados.
 - Importación de referencias bibliográficas **CSV, RIS y BibTeX**; alta manual de referencias.
-- En Cribado → Nuevo registro, introduce un DOI o enlace doi.org y pulsa **Completar desde DOI**. Consulta Crossref y completa los campos vacíos; algunos DOI no están registrados allí y muchos no incluyen resumen. Se conservan los campos manuales.
+- En Cribado → Nuevo registro, introduce un DOI o enlace doi.org y pulsa **Completar desde DOI**. Consulta Crossref y completa los campos vacíos. Si falta el abstract, busca en OpenAlex por el mismo DOI y reconstruye su texto. Informa la fuente del abstract o su ausencia; no todos los DOI tienen resumen disponible. Se conservan los campos manuales.
 - Detección de **posibles** duplicados por DOI o título/año; confirmar en cribado.
 - Cribado por título/resumen y texto completo, con estados Pendiente / Incluir / Excluir / Dudoso y códigos de exclusión configurables.
 - Matriz de extracción SES editable y gráficos de frecuencias por categoría, metodología y año.

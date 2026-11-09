@@ -34,3 +34,33 @@ test('completa un DOI, conserva datos manuales y muestra errores',async({page})=
  await page.getByRole('button',{name:'Completar desde DOI'}).click();
  await expect(page.getByRole('status')).toContainText('No se pudo conectar');
 });
+
+test('recupera abstract de OpenAlex cuando Crossref no lo incluye',async({page})=>{
+ await page.route('https://api.crossref.org/works/**',route=>route.fulfill({json:{message:{title:['Título sin abstract'],author:[],published:{'date-parts':[[2024]]}}}}));
+ let mode='found';
+ await page.route('https://api.openalex.org/works/**',route=>{
+ if(mode==='error')return route.abort();
+ return route.fulfill({json:{doi:'https://doi.org/10.1234/abstract',abstract_inverted_index:mode==='found'?{'Un':[0],'abstract':[1],'con':[2],'palabras':[3,5],'repetidas':[4]}:null}});
+ });
+ await page.goto(process.env.APP_URL||'http://127.0.0.1:5173');
+ await page.getByRole('button',{name:'Nueva revisión'}).click();
+ await page.getByRole('button',{name:'Cribado',exact:true}).click();
+ await page.getByRole('button',{name:'Nuevo registro',exact:true}).click();
+ await page.getByLabel('DOI',{exact:true}).fill('10.1234/abstract');
+ await page.getByRole('button',{name:'Completar desde DOI'}).click();
+ const summary=page.getByRole('textbox',{name:'Resumen',exact:true});
+ await expect(summary).toHaveValue('Un abstract con palabras repetidas palabras');
+ await expect(page.getByRole('status')).toContainText('Abstract recuperado de OpenAlex');
+ await summary.fill('Abstract manual');
+ await page.getByRole('button',{name:'Completar desde DOI'}).click();
+ await expect(page.getByRole('status')).toContainText('Abstract recuperado');
+ await expect(summary).toHaveValue('Abstract manual');
+ mode='missing';await summary.fill('');
+ await page.getByRole('button',{name:'Completar desde DOI'}).click();
+ await expect(page.getByRole('status')).toContainText('No se encontró abstract');
+ await expect(summary).toHaveValue('');
+ mode='error';
+ await page.getByRole('button',{name:'Completar desde DOI'}).click();
+ await expect(page.getByRole('status')).toContainText('vuelve a intentarlo');
+ await expect(page.getByLabel('Título',{exact:true})).toHaveValue('Título sin abstract');
+});
