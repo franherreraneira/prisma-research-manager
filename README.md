@@ -6,7 +6,7 @@ Aplicación web en español para organizar **varias revisiones sistemáticas**, 
 
 - Varias revisiones, cada una con pregunta, periodo, criterios y variables SES propios.
 - Registro de cadenas de búsqueda, bases, fechas, filtros y número declarado de resultados.
-- Importación de referencias bibliográficas **CSV, RIS y BibTeX**; alta manual de referencias.
+- Importación de referencias bibliográficas **CSV, RIS y BibTeX**; alta manual de referencias. CSV reconoce encabezados de Scopus, Web of Science y español (Title/Article Title/Título, Authors/Author Full Names/Autores, Year/Publication Year/Año, DOI y Abstract/Resumen). Acepta coma, punto y coma y tabulaciones; UTF-8, UTF-16 con BOM y Windows-1252. Las filas deben tener título o DOI. Se informa si el formato o las columnas no son válidos.
 - En Cribado → Nuevo registro, introduce un DOI o enlace doi.org y pulsa **Completar desde DOI**. Consulta Crossref y completa los campos vacíos. Si falta el abstract, busca en OpenAlex por el mismo DOI y reconstruye su texto. Informa la fuente del abstract o su ausencia; no todos los DOI tienen resumen disponible. Se conservan los campos manuales.
 - Detección de **posibles** duplicados por DOI o título/año; confirmar en cribado.
 - Cribado por título/resumen y texto completo, con estados Pendiente / Incluir / Excluir / Dudoso y códigos de exclusión configurables.
