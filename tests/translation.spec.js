@@ -1,0 +1,22 @@
+import {test,expect} from '@playwright/test';
+test('traducción del abstract al español conserva el texto y no trunca resúmenes largos',async({page})=>{
+ await page.goto(process.env.APP_URL||'http://127.0.0.1:5173');
+ await page.getByRole('button',{name:'Cribado',exact:true}).click();
+ await page.getByRole('button',{name:'Nuevo registro',exact:true}).click();
+ await expect(page.getByRole('button',{name:'Traducir al español',exact:true})).toBeDisabled();
+ const summary=page.getByRole('textbox',{name:'Resumen',exact:true});
+ const text='Social–ecological systems & coastal governance: 50% of fishers.';
+ await summary.fill(text);
+ const link=page.getByRole('link',{name:'Traducir al español',exact:true});
+ await expect(link).toHaveAttribute('target','_blank');
+ const url=new URL(await link.getAttribute('href'));
+ expect(url.origin).toBe('https://translate.google.com');expect(url.searchParams.get('sl')).toBe('auto');expect(url.searchParams.get('tl')).toBe('es');expect(url.searchParams.get('text')).toBe(text);
+ await page.route('https://translate.google.com/**',route=>route.fulfill({body:'Traducción de prueba'}));
+ const [popup]=await Promise.all([page.waitForEvent('popup'),link.click()]);await popup.close();
+ await expect(summary).toHaveValue(text);
+ const long='Sentence on social and ecological systems. '.repeat(200).trim();await summary.fill(long);
+ const parts=page.locator('.abstract-translation a');expect(await parts.count()).toBeGreaterThan(1);
+ const chunks=await parts.evaluateAll(nodes=>nodes.map(node=>new URL(node.href).searchParams.get('text')));
+ expect(chunks.every(chunk=>chunk.length<=3500)).toBe(true);expect(chunks.join(' ')).toBe(long);
+ await expect(summary).toHaveValue(long);
+});

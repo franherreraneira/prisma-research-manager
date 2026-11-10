@@ -14,6 +14,7 @@ Aplicación web en español para organizar **varias revisiones sistemáticas**, 
 - Detección de **posibles** duplicados por DOI o título/año; confirmar en cribado.
 - Cribado por título/resumen y texto completo, con estados Pendiente / Incluir / Excluir / Dudoso y códigos de exclusión configurables.
 - Filtro **Duplicados** junto a Pendientes, Incluidos y Excluidos: muestra los registros marcados y permite búsqueda, revisión y selección múltiple. Los otros filtros de estado omiten duplicados; Todos los conserva visibles.
+- Botón **Traducir al español** bajo el resumen de cada registro: abre Google Translate en otra pestaña con detección de idioma, conserva el texto original y divide resúmenes largos en partes. La traducción se realiza en el servicio externo, no dentro de la aplicación.
 - **Buscar duplicados** en Cribado: analiza los registros existentes de la revisión por DOI normalizado o título/año, muestra pares y motivos y permite marcar solo los seleccionados sin borrarlos. Omite los ya marcados; DOI distintos no se agrupan solo por título. Las sugerencias se pueden deshacer en «Duplicado de».
 - Selección múltiple en Cribado: casillas individuales, seleccionar todos los resultados del filtro actual y eliminar seleccionados con confirmación. La selección se limpia al cambiar de filtro, pestaña o revisión.
 - Matriz de extracción SES editable y gráficos de frecuencias por categoría, metodología y año.
