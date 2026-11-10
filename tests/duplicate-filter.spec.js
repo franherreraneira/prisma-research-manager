@@ -1,0 +1,21 @@
+import {test,expect} from '@playwright/test';
+test('filtro Duplicados, búsqueda, selección múltiple y corrección de marcas',async({page})=>{
+ await page.goto(process.env.APP_URL||'http://127.0.0.1:5173');
+ await page.getByRole('button',{name:'Cribado',exact:true}).click();
+ const status=page.getByRole('combobox',{name:'Estado de los registros',exact:true});
+ await status.selectOption('Duplicados');await expect(page.locator('.record')).toHaveCount(2);
+ await expect(page.locator('.record .chip.amber')).toHaveCount(2);
+ const all=page.getByRole('checkbox',{name:'Seleccionar todos los resultados',exact:true});
+ await all.check();await expect(page.locator('.bulktools')).toContainText('2 seleccionados');
+ const search=page.getByPlaceholder('Buscar por título, autor, DOI o resumen…');
+ await search.fill('Institutional coordination');await expect(page.locator('.record')).toHaveCount(1);
+ await expect(page.getByRole('button',{name:'Eliminar seleccionados',exact:true})).toBeDisabled();
+ await page.locator('.record').click();
+ await expect(page.locator('.editor').getByRole('combobox',{name:'Duplicado de',exact:true})).toHaveValue('d2');
+ await page.locator('.editor').getByRole('combobox',{name:'Duplicado de',exact:true}).selectOption('');
+ await expect(page.locator('.record')).toHaveCount(0);
+ await search.fill('');await expect(page.locator('.record')).toHaveCount(1);
+ await status.selectOption('Pendientes');await expect(page.locator('.record')).toHaveCount(1);
+ await expect(page.locator('.record .chip.amber')).toHaveCount(0);
+ await status.selectOption('Todos');await expect(page.locator('.record')).toHaveCount(12);
+});
