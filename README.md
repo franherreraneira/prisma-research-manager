@@ -4,6 +4,11 @@ Aplicación web en español para organizar **varias revisiones sistemáticas**, 
 
 ## Funcionalidades
 
+- Diseño de revisión orientado a OE1 (distribución temporal/geográfica), OE2 (componentes y relaciones) y OE3 (niveles sectorial, multidimensional e integrado y vacíos). Los objetivos y el alcance de los estudios sectoriales se editan en Configuración. Se conservan las preguntas personalizadas y se actualiza la pregunta demostrativa anterior.
+- Ficha por artículo incluido en Extracción SES: geografía, componentes, relaciones y dirección, retroalimentación, transformación, nivel justificado, disciplinas, construcción del conocimiento, evidencia/páginas y vacíos. No asigna niveles ni reclasifica el cribado automáticamente. Los campos se exportan al Excel y al respaldo JSON.
+- Resultados: conteos de niveles, retroalimentación y cobertura geográfica con datos faltantes explícitos. Las etiquetas geográficas se muestran como fueron ingresadas; deben normalizarse para análisis finales. La coherencia entre E2/E3 y la inclusión de estudios sectoriales queda señalada, sin cambiar criterios previos.
+
+
 - Tercera pestaña **Manuscrito** centrada en revisión sistemática para **Ecology and Society**. Modelos principales: Lasseur, Holstead y Huitema (2025), DOI 10.5751/ES-16390-300336, y Wintergalen y colegas (2022), DOI 10.5751/ES-13471-270346. Ambos publicados como Research. Métodos de búsqueda, selección y codificación explícitos; resultados por ejes conceptuales; plan de figuras y tablas con fuentes y páginas. Ambio/Socrate (DOI 10.1007/s13280-025-02299-2) queda como referencia visual complementaria para Sankey y sunburst. El plan se exporta a Word/Markdown, sin generar nuevos diagramas automáticamente. Se conservan texto y planes anteriores; todo se incluye en el respaldo JSON.
 
 
