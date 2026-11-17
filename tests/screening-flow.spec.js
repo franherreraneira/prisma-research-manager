@@ -50,3 +50,13 @@ test('revisión en móvil sin desbordamiento y criterios accesibles',async({page
  await page.getByRole('combobox',{name:'Estado de los registros',exact:true}).selectOption('Duplicados');await expect(page.locator('.record')).toHaveCount(2);
  await page.getByRole('button',{name:'Nuevo registro',exact:true}).click();await expect(page.getByLabel('Título',{exact:true})).toHaveValue('');await expect(page.getByRole('combobox',{name:'Estado de los registros',exact:true})).toHaveValue('Todos');
 });
+
+test('el avance automático respeta la búsqueda activa',async({page})=>{
+ await prepare(page);await page.getByRole('button',{name:'Revisar título y resumen (3)',exact:true}).click();
+ await page.getByPlaceholder('Buscar por título, autor, DOI o resumen…').fill('Institutional coordination');
+ await page.locator('.record').click();await page.getByLabel('Avanzar al siguiente pendiente al decidir',{exact:true}).check();
+ await page.locator('.review-navigation').getByRole('button',{name:'Incluir',exact:true}).click();
+ await expect(page.locator('.record')).toHaveCount(0);await expect(page.getByRole('heading',{name:'Leer y decidir',exact:true})).toHaveCount(0);
+ await expect(page.getByRole('status')).toContainText('en esta búsqueda y etapa');
+ await page.getByPlaceholder('Buscar por título, autor, DOI o resumen…').fill('');await expect(page.locator('.record')).toHaveCount(2);
+});
