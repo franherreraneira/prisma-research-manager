@@ -31,7 +31,7 @@ test('objetivos, extracción por artículo, resultados y respaldos sin reclasifi
  await expect(page.getByLabel('Nivel de integración',{exact:true})).toHaveValue('Integrado');
  await expect(page.getByLabel('Retroalimentaciones analizadas',{exact:true})).toHaveValue('No');
  await page.getByRole('button',{name:'Resultados',exact:true}).click();
- const results=page.locator('.integration-results');await expect(results).toContainText('Chile: 1');await expect(results).toContainText('Sin geografía informada: 4');
+ const results=page.locator('.integration-results');await expect(page.getByRole('button',{name:'Chile: 1',exact:true})).toBeVisible();await expect(page.getByText(/Sin geografía informada: 4/)).toBeVisible();
  await expect(results.locator('.stat').filter({hasText:'Integrado'})).toContainText('1');
  await expect(results.locator('.stat').filter({hasText:'Sin clasificar'})).toContainText('4');
  await page.locator('.nav').getByRole('button',{name:'Exportar',exact:true}).click();

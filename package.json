@@ -10,14 +10,18 @@
     "test": "playwright test"
   },
   "dependencies": {
+    "d3-geo": "^3.1.2",
     "docx": "^9.15.3",
     "exceljs": "^4.4.0",
+    "i18n-iso-countries": "^7.14.0",
     "idb": "^8.0.3",
     "lucide-react": "^0.468.0",
     "papaparse": "^5.5.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "recharts": "^2.15.0"
+    "recharts": "^2.15.0",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
   },
   "devDependencies": {
     "@playwright/test": "^1.65.0",
