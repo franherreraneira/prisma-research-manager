@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures';
 test('filtro Duplicados, búsqueda, selección múltiple y corrección de marcas',async({page})=>{
  await page.goto(process.env.APP_URL||'http://127.0.0.1:5173');
  await page.getByRole('button',{name:'Cribado',exact:true}).click();

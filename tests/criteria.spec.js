@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures';
 import fs from 'node:fs/promises';
 import ExcelJS from 'exceljs';
 test('criterios y palabras clave configurables visibles antes de las decisiones',async({page})=>{

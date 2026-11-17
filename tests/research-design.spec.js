@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures';
 import ExcelJS from 'exceljs';
 import fs from 'node:fs/promises';
 test('objetivos, extracción por artículo, resultados y respaldos sin reclasificar',async({page})=>{

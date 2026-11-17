@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures';
 test('completa un DOI, conserva datos manuales y muestra errores',async({page})=>{
  let requests=0;
  await page.route('https://api.crossref.org/works/**',async route=>{requests++;if(route.request().url().includes('missing'))return route.fulfill({status:404,body:'{}'});await route.fulfill({json:{message:{title:['Artículo de prueba DOI'],author:[{given:'Ana',family:'Pérez'}],published:{'date-parts':[[2024]]},'container-title':['Revista de prueba'],abstract:'<jats:p>Resumen recuperado</jats:p>'}}})});

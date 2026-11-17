@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures';
 test('selección filtrada, cancelación, eliminación múltiple y referencias duplicadas',async({page})=>{
  await page.goto(process.env.APP_URL||'http://127.0.0.1:5173');
  await page.getByRole('button',{name:'Cribado',exact:true}).click();

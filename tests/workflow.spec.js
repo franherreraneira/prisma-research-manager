@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures';
 import ExcelJS from 'exceljs';
 import fs from 'node:fs/promises';
 test('importación, cribado, SES, persistencia y exportaciones',async({page})=>{

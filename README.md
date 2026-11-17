@@ -1,8 +1,12 @@
 # PRISMA Research Manager · MVP 0.1
 
-Aplicación web en español para organizar **varias revisiones sistemáticas**, registrar búsquedas y resultados bibliográficos, realizar cribado y clasificación por etapas, codificar categorías conceptuales configurables, visualizar patrones exploratorios y exportar libros Excel y diagramas PRISMA. **Incluye un proyecto DEMOSTRATIVO enteramente ficticio sobre eólica marina y sistemas socioecológicos (SES).**
+Aplicación web en español para organizar **varias revisiones sistemáticas**, registrar búsquedas y resultados bibliográficos, realizar cribado y clasificación por etapas, codificar categorías conceptuales configurables, visualizar patrones exploratorios y exportar libros Excel y diagramas PRISMA. **Inicia con una revisión vacía, sin referencias precargadas.**
 
 ## Funcionalidades
+
+- Gestión de bases bibliográficas en **Búsquedas**: cada nueva importación tiene un ID de carga, archivo, fecha y conteo. Permite eliminar una carga concreta con confirmación, aunque haya varios archivos con el mismo nombre, o vaciar todos los registros de la revisión activa. Repara marcas de duplicados que apunten a registros borrados. Conserva búsquedas documentadas, protocolo y manuscrito.
+- Las cargas antiguas sin trazabilidad se muestran como registros sin archivo identificado (pueden incluir altas manuales); no se infiere el archivo desde la revista. El respaldo JSON conserva la trazabilidad y Excel añade ID de carga y archivo de origen a Registros.
+
 
 - Diseño de revisión orientado a OE1 (distribución temporal/geográfica), OE2 (componentes y relaciones) y OE3 (niveles sectorial, multidimensional e integrado y vacíos). Los objetivos y el alcance de los estudios sectoriales se editan en Configuración. Se conservan las preguntas personalizadas y se actualiza la pregunta demostrativa anterior.
 - Ficha por artículo incluido en Extracción SES: geografía, componentes, relaciones y dirección, retroalimentación, transformación, nivel justificado, disciplinas, construcción del conocimiento, evidencia/páginas y vacíos. No asigna niveles ni reclasifica el cribado automáticamente. Los campos se exportan al Excel y al respaldo JSON.
@@ -76,13 +80,13 @@ Sustituye `TU_USUARIO` por tu cuenta y crea antes el repositorio remoto. Reposit
 
 ## Privacidad y límites metodológicos
 
-- La publicación en GitHub Pages aloja **solo la aplicación y sus datos de demostración**, no guarda ni sincroniza tus revisiones. Tus registros locales quedan en ese navegador/ordenador. Si borras los datos del navegador o usas otro equipo, necesitarás restaurar el archivo JSON.
+- La publicación en GitHub Pages aloja **solo la aplicación**, no guarda ni sincroniza tus revisiones. Tus registros locales quedan en ese navegador/ordenador. Si borras los datos del navegador o usas otro equipo, necesitarás restaurar el archivo JSON.
 - El diagrama implementado es una **representación simplificada de la ruta de registros en bases bibliográficas** y señala si el cribado está inconcluso. El reporte PRISMA 2020 completo puede requerir otras ramas, como búsquedas por otros métodos y distinción explícita entre registros, informes y estudios. Debes verificar estas situaciones antes de publicar un artículo.
 - Los registros que figuran como duplicados se excluyen del cribado según el campo `Duplicado de`; confirma manualmente que sean la misma referencia.
 - En el cribado de texto completo se guarda una razón principal por informe excluido.
 - El contador de registros identificados se calcula desde las referencias realmente ingresadas, no desde la suma de resultados declarados en el registro de búsqueda, que puede diferir si las exportaciones no están completas.
 - El importador BibTeX está pensado para formatos simples y no cubre todas las construcciones válidas (p. ej., llaves anidadas). Revisa la calidad de la importación antes del cribado.
-- Los datos ficticios están marcados como demostración y no deben citarse como evidencia empírica.
+- La actualización retira referencias marcadas `isDemo` de las instalaciones anteriores; conserva registros reales, criterios, extracción propia y manuscritos. Las referencias sintéticas utilizadas por las pruebas están en tests y no se precargan en producción.
 - Esta primera versión es **individual**: no incluye doble cribado independiente, control de versiones colaborativo, análisis estadístico de efectos ni sincronización en la nube.
 
 ## Estado de verificación
