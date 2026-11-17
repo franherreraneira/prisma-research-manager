@@ -1,0 +1,20 @@
+import {test,expect} from './fixtures';
+test('enlaces de lectura en tarjetas, ficha y análisis agrupado por objetivos',async({page})=>{
+ await page.goto(process.env.APP_URL||'http://127.0.0.1:5173');await page.getByRole('button',{name:'Nueva revisión',exact:true}).click();await page.getByRole('button',{name:'Búsquedas',exact:true}).click();
+ await page.locator('input[type=file]').setInputFiles({name:'links.csv',mimeType:'text/csv',buffer:Buffer.from('Title,DOI,URL,Year,Abstract\nMeasured measurement,https://doi.org/10.1038/nphys1170,https://example.org/full.pdf,2009,Resumen para revisar\nOtro artículo con signos,doi:10.1234/a?x#y,,2023,Otro resumen\nArtículo sin DOI,javascript:alert(1),javascript:alert(2),2024,Sin DOI válido')});
+ await page.getByRole('button',{name:'Cribado',exact:true}).click();await page.locator('.record').first().click();
+ let access=page.locator('.recordform').getByRole('group',{name:'Acceso al documento',exact:true});
+ await expect(access.getByRole('link',{name:'Abrir artículo por DOI ↗',exact:true})).toHaveAttribute('href','https://doi.org/10.1038/nphys1170');
+ await page.getByRole('button',{name:'Revisar título y resumen (3)',exact:true}).click();access=page.locator('.swipe-card').getByRole('group',{name:'Acceso al documento',exact:true});
+ const link=access.getByRole('link',{name:'Abrir artículo por DOI ↗',exact:true});await expect(link).toHaveAttribute('target','_blank');await expect(access.getByRole('link',{name:'Abrir enlace de lectura ↗',exact:true})).toHaveAttribute('href','https://example.org/full.pdf');
+ await page.context().route('https://doi.org/**',route=>route.fulfill({body:'Página de artículo para prueba'}));
+ const [popup]=await Promise.all([page.waitForEvent('popup'),link.click()]);await popup.close();await expect(page.locator('.swipe-card h2')).toHaveText('Measured measurement');
+ await page.locator('.swipe-card').getByRole('button',{name:'Incluir →',exact:true}).click();await expect(page.locator('.swipe-card').getByRole('link',{name:'Abrir artículo por DOI ↗',exact:true})).toHaveAttribute('href','https://doi.org/10.1234/a%3Fx%23y');
+ await page.locator('.swipe-card').getByRole('button',{name:'Incluir →',exact:true}).click();await expect(page.locator('.swipe-card h2')).toHaveText('Artículo sin DOI');await expect(page.locator('.swipe-card').getByRole('link',{name:'Abrir artículo por DOI ↗',exact:true})).toHaveCount(0);await expect(page.locator('.swipe-card').getByRole('link',{name:'Abrir enlace de lectura ↗',exact:true})).toHaveCount(0);await expect(page.locator('.swipe-card').getByRole('link',{name:'Buscar artículo por título ↗',exact:true})).toHaveAttribute('href',/scholar.google.com/);
+ await page.getByRole('button',{name:'Revisar texto completo (2)',exact:true}).click();await page.locator('.swipe-card').getByRole('button',{name:'Incluir →',exact:true}).click();
+ await page.getByRole('button',{name:'Analizar artículos incluidos →',exact:true}).click();
+ await expect(page.locator('.nav').getByRole('button',{name:'Análisis por objetivos',exact:true})).toHaveClass('active');
+ await expect(page.getByRole('group',{name:'OE1 · Distribución temporal y geográfica',exact:true})).toBeVisible();await expect(page.getByRole('group',{name:'OE2 · Componentes, relaciones e interdependencias',exact:true})).toBeVisible();await expect(page.getByRole('group',{name:'OE3 · Nivel de integración y vacíos',exact:true})).toBeVisible();
+ await expect(page.locator('.integration-extraction').getByRole('link',{name:'Abrir artículo por DOI ↗',exact:true})).toHaveAttribute('href','https://doi.org/10.1038/nphys1170');
+ await page.getByLabel('País o región estudiada',{exact:true}).fill('Chile');await page.getByLabel('Componentes sociales',{exact:true}).selectOption('Sí');await page.reload();await page.getByRole('button',{name:'Análisis por objetivos',exact:true}).click();await expect(page.getByLabel('País o región estudiada',{exact:true})).toHaveValue('Chile');await expect(page.getByLabel('Componentes sociales',{exact:true})).toHaveValue('Sí');
+});

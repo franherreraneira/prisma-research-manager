@@ -9,7 +9,7 @@ test('objetivos, extracción por artículo, resultados y respaldos sin reclasifi
  await page.getByLabel('Alcance de los estudios sectoriales',{exact:true}).selectOption('Incluir sectoriales para comparar niveles');
  await page.getByLabel('Objetivo específico 3',{exact:true}).fill('Comparar niveles y vacíos del corpus.');
  await expect(page.getByRole('textbox',{name:'Motivo',exact:true})).toHaveCount(7);
- await page.getByRole('button',{name:'Extracción SES',exact:true}).click();
+ await page.getByRole('button',{name:'Análisis por objetivos',exact:true}).click();
  await expect(page.getByLabel('Nivel de integración',{exact:true})).toHaveValue('Sin clasificar');
  await page.getByLabel('Nivel de integración',{exact:true}).selectOption('Integrado');
  await expect(page.getByText('El nivel Integrado requiere justificar relaciones explícitas; revisa el indicador y la evidencia.',{exact:true})).toBeVisible();
@@ -36,10 +36,10 @@ test('objetivos, extracción por artículo, resultados y respaldos sin reclasifi
  await expect(results.locator('.stat').filter({hasText:'Sin clasificar'})).toContainText('4');
  await page.locator('.nav').getByRole('button',{name:'Exportar',exact:true}).click();
  const [file]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'XLSX',exact:true}).click()]);
- const wb=new ExcelJS.Workbook();await wb.xlsx.readFile(await file.path());const sheet=wb.getWorksheet('Extracción SES');
+ const wb=new ExcelJS.Workbook();await wb.xlsx.readFile(await file.path());const sheet=wb.getWorksheet('Análisis por objetivos');
  const heads=sheet.getRow(1).values;const index=heads.indexOf('Nivel de integración');expect(sheet.getRow(2).getCell(index).value).toBe('Integrado');expect(sheet.getRow(3).getCell(index).value).toBe('Sin clasificar');
  expect(wb.getWorksheet('Proyecto').getRows(1,10).map(row=>row.values).flat()).toContain('Comparar niveles y vacíos del corpus.');
  const [backup]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Respaldo',exact:true}).click()]);const saved=JSON.parse(await fs.readFile(await backup.path(),'utf8')).projects[0];
  expect(saved.researchDesign.scope).toBe('Incluir sectoriales para comparar niveles');expect(saved.records).toHaveLength(12);expect(saved.records[0].screen).toBe('Incluir');expect(saved.reasons).toHaveLength(7);
- await page.reload();await page.getByRole('button',{name:'Extracción SES',exact:true}).click();await expect(page.getByLabel('País o región estudiada',{exact:true})).toHaveValue('Chile');
+ await page.reload();await page.getByRole('button',{name:'Análisis por objetivos',exact:true}).click();await expect(page.getByLabel('País o región estudiada',{exact:true})).toHaveValue('Chile');
 });

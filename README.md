@@ -4,6 +4,10 @@ Aplicación web en español para organizar **varias revisiones sistemáticas**, 
 
 ## Funcionalidades
 
+- **Análisis por objetivos** sustituye la etiqueta Extracción SES: ficha principal organizada en OE1, OE2 y OE3, ejes de construcción de conocimiento y evidencia. Los códigos temáticos previos quedan como tabla complementaria. El Excel usa la hoja Análisis por objetivos y conserva los datos codificados.
+- **Abrir artículo por DOI** en tarjetas, ficha y análisis, en otra pestaña; el DOI puede llevar a una página editorial con acceso restringido. Permite añadir/importar un enlace de lectura alternativo (CSV URL, RIS UR y BibTeX url). Si no hay enlace válido ofrece buscar el título, sin presentarlo como texto completo confirmado. Solo se habilitan URLs HTTP(S); los DOI se codifican de forma segura.
+
+
 - **Modo tarjetas para cribado**: título, abstract y palabras clave; deslizar la franja superior a derecha para incluir o izquierda para excluir, botones grandes y opción Dudoso. Entra desde una cola de pendientes o Modo tarjetas. El avance automático se activa al entrar y puede desactivarse en Opciones de revisión. Deshacer y vista editable disponibles; una exclusión a texto completo requiere motivo antes de avanzar. El abstract es desplazable sin clasificar por accidente.
 - Keywords conservadas de CSV (incluidos Author Keywords), RIS (KW) y BibTeX (keywords), editables en la ficha y exportadas a Registros en Excel. Los archivos que no las incluyen se muestran sin palabras clave; no se inventan ni derivan del abstract.
 
@@ -16,7 +20,7 @@ Aplicación web en español para organizar **varias revisiones sistemáticas**, 
 
 
 - Diseño de revisión orientado a OE1 (distribución temporal/geográfica), OE2 (componentes y relaciones) y OE3 (niveles sectorial, multidimensional e integrado y vacíos). Los objetivos y el alcance de los estudios sectoriales se editan en Configuración. Se conservan las preguntas personalizadas y se actualiza la pregunta demostrativa anterior.
-- Ficha por artículo incluido en Extracción SES: geografía, componentes, relaciones y dirección, retroalimentación, transformación, nivel justificado, disciplinas, construcción del conocimiento, evidencia/páginas y vacíos. No asigna niveles ni reclasifica el cribado automáticamente. Los campos se exportan al Excel y al respaldo JSON.
+- Ficha por artículo incluido en Análisis por objetivos: geografía, componentes, relaciones y dirección, retroalimentación, transformación, nivel justificado, disciplinas, construcción del conocimiento, evidencia/páginas y vacíos. No asigna niveles ni reclasifica el cribado automáticamente. Los campos se exportan al Excel y al respaldo JSON.
 - Resultados: conteos de niveles, retroalimentación y cobertura geográfica con datos faltantes explícitos. Las etiquetas geográficas se muestran como fueron ingresadas; deben normalizarse para análisis finales. La coherencia entre E2/E3 y la inclusión de estudios sectoriales queda señalada, sin cambiar criterios previos.
 
 
@@ -81,7 +85,7 @@ Sustituye `TU_USUARIO` por tu cuenta y crea antes el repositorio remoto. Reposit
 1. **Configuración**: define pregunta, periodo, códigos de exclusión y variables SES.
 2. **Búsquedas**: registra cadenas, fecha, filtros e importa CSV/RIS/BibTeX de tus bases.
 3. **Cribado**: verifica posibles duplicados y registra decisiones por etapa, con razones de exclusión a texto completo.
-4. **Extracción SES**: codifica los artículos incluidos.
+4. **Análisis por objetivos**: codifica los artículos incluidos.
 5. **Resultados**: examina frecuencias y evolución temporal, que **no** son un metaanálisis de efectos.
 6. **Exportar**: obtiene el diagrama, el Excel y una copia JSON que te permite continuar en otro equipo.
 

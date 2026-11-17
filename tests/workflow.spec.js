@@ -25,13 +25,13 @@ test('importación, cribado, SES, persistencia y exportaciones',async({page})=>{
  await page.locator('.decisions').nth(1).getByRole('button',{name:'Excluir',exact:true}).click();
  await page.getByLabel('Razón principal de exclusión').count().catch(()=>0);
  await page.locator('.reasons select').selectOption('E2');
- await page.getByRole('button',{name:'Extracción SES',exact:true}).click();
+ await page.getByRole('button',{name:'Análisis por objetivos',exact:true}).click();
  const row=page.locator('tbody tr');await expect(row).toHaveCount(1);
  await row.locator('select').nth(0).selectOption('Explícito');
  await row.locator('select').nth(1).selectOption('Mixta');
  await row.locator('input[type=checkbox]').first().check();
  await expect.poll(()=>page.evaluate(async()=>{const db=await new Promise((resolve,reject)=>{const req=indexedDB.open('prisma-research-manager',1);req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)});try{return await new Promise((resolve,reject)=>{const req=db.transaction('state').objectStore('state').get('main');req.onsuccess=()=>{const state=req.result;resolve(state?.projects.find(p=>p.id===state.active)?.records.find(r=>r.title==='Estudio CSV'&&!r.duplicateOf)?.codes.includes('social'))};req.onerror=()=>reject(req.error)})}finally{db.close()}})).toBe(true);
- await page.reload();await page.getByRole('button',{name:'Extracción SES',exact:true}).click();
+ await page.reload();await page.getByRole('button',{name:'Análisis por objetivos',exact:true}).click();
  await expect(page.locator('tbody tr select').first()).toHaveValue('Explícito');
  await expect(page.locator('tbody input[type=checkbox]').first()).toBeChecked();
  await page.locator('.nav').getByRole('button',{name:'Exportar',exact:true}).click();
@@ -40,8 +40,8 @@ test('importación, cribado, SES, persistencia y exportaciones',async({page})=>{
  const [xlsx]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'XLSX',exact:true}).click()]);
  const wb=new ExcelJS.Workbook();await wb.xlsx.readFile(await xlsx.path());
  expect(wb.worksheets).toHaveLength(7);expect(wb.getWorksheet('Registros').rowCount).toBe(5);
- expect(wb.getWorksheet('Extracción SES').getRow(2).getCell(5).value).toBe('Explícito');
- expect(wb.getWorksheet('Extracción SES').getRow(2).getCell(6).value).toBe(1);
+ expect(wb.getWorksheet('Análisis por objetivos').getRow(2).getCell(5).value).toBe('Explícito');
+ expect(wb.getWorksheet('Análisis por objetivos').getRow(2).getCell(6).value).toBe(1);
  for(const format of ['SVG','PNG']){
  const [file]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:`Descargar ${format}`}).click()]);
  const bytes=await fs.readFile(await file.path());
@@ -51,7 +51,7 @@ test('importación, cribado, SES, persistencia y exportaciones',async({page})=>{
  await page.getByRole('button',{name:'Cribado',exact:true}).click();
  await page.locator('.record').filter({hasText:'Estudio CSV'}).first().click();
  await page.locator('.decisions').first().getByRole('button',{name:'Excluir',exact:true}).click();
- await page.getByRole('button',{name:'Extracción SES',exact:true}).click();
+ await page.getByRole('button',{name:'Análisis por objetivos',exact:true}).click();
  await expect(page.locator('tbody tr')).toHaveCount(0);
  expect(errors).toEqual([]);
 });
