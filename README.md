@@ -4,6 +4,10 @@ Aplicación web en español para organizar **varias revisiones sistemáticas**, 
 
 ## Funcionalidades
 
+- **Modo tarjetas para cribado**: título, abstract y palabras clave; deslizar la franja superior a derecha para incluir o izquierda para excluir, botones grandes y opción Dudoso. Entra desde una cola de pendientes o Modo tarjetas. El avance automático se activa al entrar y puede desactivarse en Opciones de revisión. Deshacer y vista editable disponibles; una exclusión a texto completo requiere motivo antes de avanzar. El abstract es desplazable sin clasificar por accidente.
+- Keywords conservadas de CSV (incluidos Author Keywords), RIS (KW) y BibTeX (keywords), editables en la ficha y exportadas a Registros en Excel. Los archivos que no las incluyen se muestran sin palabras clave; no se inventan ni derivan del abstract.
+
+
 - Cribado enfocado en lectura y decisión: colas de pendientes para título/resumen y texto completo, abstract antes de los metadatos, criterios compactos con coincidencias visibles, navegación anterior/siguiente y avance automático opcional. Atajos I/E/D fuera de campos de edición y deshacer de la última decisión de la sesión. Una exclusión a texto completo sin motivo permanece pendiente; con avance automático espera el motivo. La vista completa conserva la edición de ambas etapas. Diseño adaptable a móvil.
 
 

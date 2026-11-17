@@ -6,6 +6,7 @@ const aliases = {
  authors: ['authors','author','author full names','autores','autor','AU','AF','A1'],
  year: ['year','publication year','pub year','ano','ano de publicacion','fecha de publicacion','PY','Y1'],
  doi: ['doi','document doi','article doi','DO','identificador doi'],
+ keywords: ['keywords','author keywords','index keywords','palabras clave','palabras claves','key words','KW','DE'],
  abstract: ['abstract','abstract note','abstracts','resumen','resumo','AB','N2'],
  source: ['source','database','base de datos','fuente','source title','publication title','journal','journal title','revista','SO','JO','T2']
 };
@@ -15,7 +16,7 @@ export function mapBibliographicFields(row) {
 }
 export function normalizeRecord(row) {
  const o=mapBibliographicFields(row);
- return {id:crypto.randomUUID(),title:String(o.title||'Sin título').trim(),authors:String(o.authors).trim(),year:String(o.year).match(/\d{4}/)?.[0]||'',source:String(o.source||'Importación').trim(),doi:normalizeDOI(o.doi),abstract:String(o.abstract).trim(),screen:'Pendiente',full:'Pendiente',reasons:[],fullObtained:true,codes:[],method:'Sin codificar',ses:'Sin codificar',notes:'',isDemo:false};
+ return {id:crypto.randomUUID(),title:String(o.title||'Sin título').trim(),authors:String(o.authors).trim(),year:String(o.year).match(/\d{4}/)?.[0]||'',source:String(o.source||'Importación').trim(),doi:normalizeDOI(o.doi),abstract:String(o.abstract).trim(),keywords:String(o.keywords).trim(),screen:'Pendiente',full:'Pendiente',reasons:[],fullObtained:true,codes:[],method:'Sin codificar',ses:'Sin codificar',notes:'',isDemo:false};
 }
 export function parseCSV(input) {
  let text=String(input).replace(/^\uFEFF/,'');
