@@ -4,6 +4,9 @@ Aplicación web en español para organizar **varias revisiones sistemáticas**, 
 
 ## Funcionalidades
 
+- Cribado enfocado en lectura y decisión: colas de pendientes para título/resumen y texto completo, abstract antes de los metadatos, criterios compactos con coincidencias visibles, navegación anterior/siguiente y avance automático opcional. Atajos I/E/D fuera de campos de edición y deshacer de la última decisión de la sesión. Una exclusión a texto completo sin motivo permanece pendiente; con avance automático espera el motivo. La vista completa conserva la edición de ambas etapas. Diseño adaptable a móvil.
+
+
 - Gestión de bases bibliográficas en **Búsquedas**: cada nueva importación tiene un ID de carga, archivo, fecha y conteo. Permite eliminar una carga concreta con confirmación, aunque haya varios archivos con el mismo nombre, o vaciar todos los registros de la revisión activa. Repara marcas de duplicados que apunten a registros borrados. Conserva búsquedas documentadas, protocolo y manuscrito.
 - Las cargas antiguas sin trazabilidad se muestran como registros sin archivo identificado (pueden incluir altas manuales); no se infiere el archivo desde la revista. El respaldo JSON conserva la trazabilidad y Excel añade ID de carga y archivo de origen a Registros.
 
