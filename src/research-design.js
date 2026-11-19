@@ -6,7 +6,7 @@ export const OBJECTIVES=[
 ];
 export const researchQuestion=p=>!p.question||p.question==='¿Cómo se conceptualiza la eólica marina desde la perspectiva de los sistemas socioecológicos en la literatura científica?'?RESEARCH_QUESTION:p.question;
 export const integrationFields=[
- ['country','País o región estudiada','text'],['location','Localización o caso','text'],['scale','Escala espacial','text'],
+ ['country','País o región estudiada','text'],['marineAreas','Mares, océanos o regiones marinas estudiadas','textarea'],['location','Localización o caso','text'],['scale','Escala espacial','text'],
  ['approach','Enfoque del estudio: cómo plantea la relación sociedad–naturaleza','textarea'],['socialDescription','Qué componentes sociales analiza','textarea'],['ecologicalDescription','Qué componentes ecológicos analiza','textarea'],['interactionMechanism','Cómo presenta los mecanismos de interacción','textarea'],
  ['social','Componentes sociales',['No informado','Sí','No']],['ecological','Componentes ecológicos',['No informado','Sí','No']],['technical','Componentes técnico-económicos',['No informado','Sí','No']],
  ['relations','Relaciones explícitas entre componentes',['No informado','Sí','No']],['direction','Dirección de las relaciones',['No informado','Unidireccional','Recíproca','Múltiples relaciones']],

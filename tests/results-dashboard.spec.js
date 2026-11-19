@@ -15,7 +15,7 @@ test('resultados reflejan OE1–OE3 y prompt descargable del artículo',async({p
  const prompt=page.getByLabel('Prompt de lectura por objetivos');await expect(prompt).toContainText('OE1:');await expect(prompt).toContainText('No confundas afiliación');
  const [file]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Descargar prompt',exact:true}).click()]);const content=await fs.readFile(await file.path(),'utf8');expect(content).toContain('TEXTO DEL ARTÍCULO');expect(content).toContain('E2/E3');
  await page.getByRole('button',{name:'Resultados',exact:true}).click();
- await expect(page.getByText('Sin geografía informada: 4.',{exact:false})).toBeVisible();
+ await expect(page.getByText('Sin país informado: 4.',{exact:false})).toBeVisible();
  await expect(page.getByRole('button',{name:'Chile: 1',exact:true})).toBeVisible();await expect(page.getByRole('button',{name:'Reino Unido: 1',exact:true})).toBeVisible();
  await expect(page.getByText('Europa: 1',{exact:true})).toBeVisible();
  await page.getByRole('button',{name:'Chile: 1 artículos',exact:true}).focus();await page.keyboard.press('Enter');await expect(page.getByRole('heading',{name:'Artículos · Chile'})).toBeVisible();
