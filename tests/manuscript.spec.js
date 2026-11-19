@@ -10,7 +10,7 @@ async function seed(page,manuscript){
 test('revisión de Ecology and Society, adaptación del ejemplo y exportación con plan visual',async({page})=>{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await seed(page,{journal:'marine',type:'original',drafts:{'marine:original':{title:'Mi manuscrito',introduction:'Texto anterior'},'energy:systematic':{title:'Otro borrador'}}});
- await expect(page.locator('.nav button').nth(2)).toHaveText('Manuscrito');
+ await expect(page.locator('.nav button').nth(5)).toHaveText('Manuscrito');await expect(page.locator('.nav button').nth(6)).toHaveText('Exportar');
  await expect(page.getByRole('heading',{name:'Revisión sistemática · Ecology and Society',exact:true})).toBeVisible();
  await expect(page.getByRole('combobox',{name:'Revista objetivo'})).toHaveCount(0);
  await expect(page.getByRole('combobox',{name:'Tipo de artículo'})).toHaveCount(0);
