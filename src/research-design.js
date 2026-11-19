@@ -7,6 +7,7 @@ export const OBJECTIVES=[
 export const researchQuestion=p=>!p.question||p.question==='¿Cómo se conceptualiza la eólica marina desde la perspectiva de los sistemas socioecológicos en la literatura científica?'?RESEARCH_QUESTION:p.question;
 export const integrationFields=[
  ['country','País o región estudiada','text'],['location','Localización o caso','text'],['scale','Escala espacial','text'],
+ ['approach','Enfoque del estudio: cómo plantea la relación sociedad–naturaleza','textarea'],['socialDescription','Qué componentes sociales analiza','textarea'],['ecologicalDescription','Qué componentes ecológicos analiza','textarea'],['interactionMechanism','Cómo presenta los mecanismos de interacción','textarea'],
  ['social','Componentes sociales',['No informado','Sí','No']],['ecological','Componentes ecológicos',['No informado','Sí','No']],['technical','Componentes técnico-económicos',['No informado','Sí','No']],
  ['relations','Relaciones explícitas entre componentes',['No informado','Sí','No']],['direction','Dirección de las relaciones',['No informado','Unidireccional','Recíproca','Múltiples relaciones']],
  ['relationDescription','Descripción de las relaciones e interdependencias','textarea'],
@@ -16,7 +17,7 @@ export const integrationFields=[
  ['disciplines','Disciplinas participantes','text'],['interdisciplinarity','Articulación disciplinaria',['No informado','Disciplinaria','Multidisciplinaria','Interdisciplinaria']],
  ['transdisciplinarity','Participación en la construcción de conocimiento',['No informado','Sin participación no académica','Consulta a actores','Colaboración con actores','Coproducción transdisciplinaria']],
  ['natureSociety','Concepción de la relación sociedad–naturaleza','textarea'],['knowledge','Cómo se construye el conocimiento','textarea'],
- ['evidence','Fragmento de evidencia','textarea'],['pages','Página(s) de la evidencia','text'],['gaps','Vacíos y límites identificados','textarea']
+ ['evidence','Fragmento de evidencia','textarea'],['pages','Página(s) de la evidencia','text'],['gaps','Vacíos y límites identificados','textarea'],['authorGaps','Vacíos declarados por los autores','textarea'],['reviewerGaps','Vacíos identificados por la revisora','textarea']
 ];
 export function integrationWarnings(a={}){
  const warnings=[];

@@ -15,14 +15,14 @@ export function ResearchDesign({project,update,editable=false}){
  <div className="hint">Para comparar estudios sectoriales, multidimensionales e integrados, el corpus debe permitir esos niveles. Revisa E2/E3: excluir todo estudio sin vínculos socioecológicos limita la comparación. Esta actualización conserva los motivos y decisiones previos; no reclasifica artículos.</div>
  <details><summary>Reglas de clasificación y ejes complementarios</summary><p><b>Sectorial:</b> se concentra en un sector o componente sin analizar su articulación socioecológica.</p><p><b>Multidimensional:</b> considera componentes sociales y ecológicos principalmente por separado.</p><p><b>Integrado:</b> analiza explícitamente relaciones entre componentes sociales y ecológicos. Retroalimentación y transformación se registran aparte: no son equivalentes ni se deducen unas de otras.</p><p>La articulación disciplinaria, la participación de actores no académicos y la concepción sociedad–naturaleza se codifican por separado. No se asignan automáticamente a partir del nivel.</p></details></div>
 }
-export function IntegrationExtraction({records,edit,project}){
- const[selected,setSelected]=useState('');const[search,setSearch]=useState('');const record=records.find(r=>r.id===selected)||records[0];
+export function IntegrationExtraction({records,edit,project,initialRecordId=''}){
+ const[selected,setSelected]=useState(initialRecordId);const[search,setSearch]=useState('');const record=records.find(r=>r.id===selected)||records[0];
  if(!record)return <div className="panel"><h2>Análisis por objetivos</h2><p>Primero decide qué artículos incluir en Cribado. Después abre aquí sus documentos y registra qué aportan a OE1, OE2 y OE3.</p></div>;
  const a=record.integrationAnalysis||{},objectives=project?.researchDesign?.objectives||OBJECTIVES;function change(key,value){edit(record.id,{integrationAnalysis:{...a,[key]:value}})}
  const groups=[
  {id:'oe1',title:'OE1 · Distribución temporal y geográfica',goal:objectives[0],keys:['country','location','scale']},
- {id:'oe2',title:'OE2 · Componentes, relaciones e interdependencias',goal:objectives[1],keys:['social','ecological','technical','relations','direction','relationDescription','feedback','transformation']},
- {id:'oe3',title:'OE3 · Nivel de integración y vacíos',goal:objectives[2],keys:['level','rationale','gaps']},
+ {id:'oe2',title:'OE2 · Componentes, relaciones e interdependencias',goal:objectives[1],keys:['approach','socialDescription','ecologicalDescription','social','ecological','technical','relations','direction','relationDescription','interactionMechanism','feedback','transformation']},
+ {id:'oe3',title:'OE3 · Nivel de integración y vacíos',goal:objectives[2],keys:['level','rationale','authorGaps','reviewerGaps','gaps']},
  {id:'knowledge',title:'Ejes complementarios · Disciplinas y construcción del conocimiento',goal:'Compara estos ejes con los niveles sin equipararlos automáticamente.',keys:['disciplines','interdisciplinarity','transdisciplinarity','natureSociety','knowledge']},
  {id:'evidence',title:'Evidencia del análisis',goal:'Anota fragmentos y páginas e indica el objetivo o interpretación que respalda cada uno.',keys:['evidence','pages']}
  ];
