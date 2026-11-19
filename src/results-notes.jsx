@@ -1,0 +1,6 @@
+import React from 'react';
+const labels={interactions:'Interacciones · OE2',comparison:'Comparación de niveles · OE3',gaps:'Vacíos de conocimiento'};
+export function ResultsNotes({project,update}){
+ const previous=Object.entries(project.qualitativeSynthesis||{}).flatMap(([base,notes])=>Object.entries(notes).filter(([,text])=>typeof text==='string'&&text.trim()).map(([key,text])=>({base,key,text})));
+ return <section className="panel results-notes" id="result-notes" aria-label="Apuntes generales"><h2>Apuntes generales</h2><label>Apuntes generales de resultados<textarea aria-label="Apuntes generales de resultados" rows={7} placeholder="Anota aquí tus observaciones, ideas y conclusiones de la revisión." value={project.resultsNotes||''} onChange={e=>update(p=>({...p,resultsNotes:e.target.value}))}/></label><p className="fine">Se guardan automáticamente en esta revisión y se incluyen en el respaldo y el Excel.</p>{previous.length>0&&<details><summary>Consultar apuntes guardados en la versión anterior</summary>{previous.map(({base,key,text})=><div key={`${base}-${key}`}><h3>{base==='included'?'Incluidos finales':base==='corpus'?'Corpus importado':base} · {labels[key]||key}</h3><p style={{whiteSpace:'pre-wrap',overflowWrap:'anywhere'}}>{text}</p></div>)}</details>}</section>;
+}
