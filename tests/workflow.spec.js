@@ -8,7 +8,7 @@ test('importación, cribado, SES, persistencia y exportaciones',async({page})=>{
  await page.getByLabel('Título de la revisión',{exact:true}).fill('Verificación PRISMA');
  await page.getByRole('button',{name:'Búsquedas',exact:true}).click();
  await page.locator('input[type=file]').setInputFiles([
- {name:'sample.csv',mimeType:'text/csv',buffer:Buffer.from('title,authors,year,doi\nEstudio CSV,Ana,2024,10.123/csv\nEstudio CSV,Ana,2024,https://doi.org/10.123/csv')},
+ {name:'sample.csv',mimeType:'text/csv',buffer:Buffer.from('title,authors,year,doi\nEstudio CSV,Ana,2024,10.1234/csv\nEstudio CSV,Ana,2024,https://doi.org/10.1234/csv')},
  {name:'sample.ris',mimeType:'text/plain',buffer:Buffer.from('TY  - JOUR\nTI  - Estudio RIS\nAU  - Luis\nPY  - 2023\nER  - ')},
  {name:'sample.bib',mimeType:'text/plain',buffer:Buffer.from('@article{a,title={Estudio BibTeX},author={Eva},year={2022}}')}
  ]);

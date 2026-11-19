@@ -14,7 +14,7 @@ export function SwipeCard({record,phase,onDecide,edit,onEdit,onUndo,canUndo}){
  <h3>Palabras clave</h3><div className="swipe-keywords">{terms.length?terms.map((term,i)=><span key={i}>{term}</span>):<p className="fine">Sin palabras clave informadas. Puedes añadirlas en Editar ficha.</p>}</div>
  <h3>Abstract / Resumen</h3><div className="swipe-abstract" tabIndex={0}>{record.abstract||'Sin abstract disponible. Abre Editar ficha para completarlo o recuperarlo desde DOI. No excluyas por la sola ausencia del resumen.'}</div><AbstractTranslation text={record.abstract}/>
  <label>Notas / justificación<textarea aria-label="Notas / justificación" rows={2} value={record.notes||''} onChange={e=>edit(record.id,{notes:e.target.value})}/></label></div>
- <div className="swipe-actions"><button className="swipe-exclude" disabled={!enabled} onClick={()=>decide('Excluir')}>← Excluir</button><button className="swipe-unsure" disabled={!enabled} onClick={()=>decide('Dudoso')}>? Dudoso</button><button className="swipe-include" disabled={!enabled} onClick={()=>decide('Incluir')}>Incluir →</button></div>
+ <div className="swipe-actions"><button className="swipe-exclude" disabled={!enabled} onClick={()=>decide('Excluir')}>← Excluir</button><button className="swipe-unsure" disabled={!enabled} onClick={()=>decide('Dudoso')}>? Dudoso</button><button className="swipe-include" disabled={!enabled} onClick={()=>decide('Incluir')}>{full?'Incluir en la síntesis →':'Incluir →'}</button></div>
  <p className="swipe-caption">{full?'La inclusión es final. Si excluyes, selecciona un motivo arriba.':'Incluir pasa el artículo a texto completo; todavía no es la inclusión final.'} Puedes deshacer la última decisión. <a href="#review-options">Opciones de revisión</a></p>
  </article>
 }
