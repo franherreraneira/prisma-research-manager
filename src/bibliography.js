@@ -2,6 +2,8 @@ import Papa from 'papaparse';
 import {normalizeDOI} from './doi';
 const key = value => String(value).replace(/^\uFEFF/, '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
 const aliases = {
+ journal:['journal','journal title','source title','publication title','revista','JO','JF','JT','T2'],
+ volume:['volume','volumen','VL'],issue:['issue','number','numero','IS'],pages:['pages','page','paginas','SP'],articleNumber:['article number','article-number','numero de articulo'],
  title: ['title','article title','document title','primary title','titulo','titulo del articulo','TI','T1'],
  authors: ['authors','author','author full names','autores','autor','AU','AF','A1'],
  year: ['year','publication year','pub year','ano','ano de publicacion','fecha de publicacion','PY','Y1'],
@@ -17,7 +19,7 @@ export function mapBibliographicFields(row) {
 }
 export function normalizeRecord(row) {
  const o=mapBibliographicFields(row);
- return {id:crypto.randomUUID(),title:String(o.title||'Sin título').trim(),authors:String(o.authors).trim(),year:String(o.year).match(/\d{4}/)?.[0]||'',source:String(o.source||'Importación').trim(),doi:normalizeDOI(o.doi),abstract:String(o.abstract).trim(),keywords:String(o.keywords).trim(),documentUrl:String(o.documentUrl).trim(),screen:'Pendiente',full:'Pendiente',reasons:[],fullObtained:true,codes:[],method:'Sin codificar',ses:'Sin codificar',notes:'',isDemo:false};
+ return {journal:String(o.journal).trim(),volume:String(o.volume).trim(),issue:String(o.issue).trim(),pages:String(o.pages).trim(),articleNumber:String(o.articleNumber).trim(),id:crypto.randomUUID(),title:String(o.title||'Sin título').trim(),authors:String(o.authors).trim(),year:String(o.year).match(/\d{4}/)?.[0]||'',source:String(o.source||'Importación').trim(),doi:normalizeDOI(o.doi),abstract:String(o.abstract).trim(),keywords:String(o.keywords).trim(),documentUrl:String(o.documentUrl).trim(),screen:'Pendiente',full:'Pendiente',reasons:[],fullObtained:true,codes:[],method:'Sin codificar',ses:'Sin codificar',notes:'',isDemo:false};
 }
 export function parseCSV(input) {
  let text=String(input).replace(/^\uFEFF/,'');

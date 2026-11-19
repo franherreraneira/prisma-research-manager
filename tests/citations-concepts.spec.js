@@ -1,0 +1,24 @@
+import {test,expect} from './fixtures';
+import {formatAPA} from '../src/apa-format';
+import {conceptGroups} from '../src/concepts';
+import fs from 'node:fs/promises';
+test('APA 7 usa autores estructurados, cursivas y DOI; los conceptos cuentan artículos distintos',()=>{
+ const output=formatAPA({id:'a',type:'article-journal',title:'Marine governance',author:[{family:'Ostrom',given:'Elinor'},{family:'Basurto',given:'Xavier'},{family:'Adger',given:'William Neil'}],issued:{'date-parts':[[2024]]},'container-title':'Marine Policy',volume:'150',issue:'2',page:'1–12',DOI:'10.1234/paper'});
+ expect(output.text).toContain('Ostrom, E.');expect(output.text).toContain('Basurto, X.');expect(output.html).toContain('<i>Marine Policy</i>');expect(output.text).toContain('https://doi.org/10.1234/paper');expect(output.short).toMatch(/Ostrom et\s+al\., 2024/);
+ const article=formatAPA({id:'b',type:'article-journal',title:'Test',author:[{family:'Ostrom',given:'Elinor'}],issued:{'date-parts':[[2024]]},'container-title':'Ecology and Society',volume:'29',issue:'1',number:'e123'});expect(article.text).toContain('Article e123');
+ const group=conceptGroups([{id:'a',conceptHighlights:[{label:'Integración',dimension:'Integración'},{label:'integracion',dimension:'Integración'}]},{id:'b',conceptHighlights:[{label:'Integración',dimension:'Integración'}]}]);expect(group[2].concepts).toHaveLength(1);expect(group[2].concepts[0].records).toHaveLength(2);
+});
+test('APA por DOI, conceptos con evidencia y cuadrantes conservados en respaldo',async({page})=>{
+ await page.context().grantPermissions(['clipboard-read','clipboard-write']);
+ await page.route('https://api.crossref.org/works/**',route=>route.fulfill({json:{message:{DOI:'10.1234/paper',type:'journal-article',title:['Offshore wind and coastal fishing communities: coupled interactions'],author:[{family:'Ostrom',given:'Elinor'},{family:'Basurto',given:'Xavier'},{family:'Adger',given:'William Neil'}],published:{'date-parts':[[2024]]},'container-title':['Marine Policy'],volume:'150',issue:'2',page:'1-12'}}}));
+ await page.getByRole('button',{name:'Cribado',exact:true}).click();await page.locator('.record').first().click();await page.getByLabel('DOI',{exact:true}).fill('10.1234/paper');
+ await page.getByRole('button',{name:'Análisis por objetivos',exact:true}).click();
+ const apa=page.getByRole('region',{name:'Referencia APA del artículo',exact:true});await expect(apa).toContainText('Fuente bibliográfica: Crossref');await expect(apa).toContainText('Marine Policy');await expect(apa.locator('.apa-short')).toContainText('Ostrom et al., 2024');
+ await apa.getByRole('button',{name:'Copiar referencia APA',exact:true}).click();await expect.poll(()=>page.evaluate(()=>navigator.clipboard.readText())).toContain('https://doi.org/10.1234/paper');
+ await apa.getByRole('button',{name:'Copiar cita breve',exact:true}).click();await expect.poll(()=>page.evaluate(()=>navigator.clipboard.readText())).toMatch(/Ostrom et\s+al\., 2024/);
+ const concepts=page.getByRole('region',{name:'Conceptos destacados del artículo',exact:true});await concepts.getByLabel('Concepto destacado',{exact:true}).fill('Coproducción');await concepts.getByLabel('Ámbito del concepto',{exact:true}).selectOption('Interfaz');await concepts.getByLabel('Evidencia del concepto',{exact:true}).fill('Evidence from the study.');await concepts.getByLabel('Página o sección del concepto',{exact:true}).fill('12');await concepts.getByRole('button',{name:'Añadir concepto',exact:true}).click();
+ await page.getByLabel('Artículo para análisis',{exact:true}).selectOption('d2');await expect(concepts).not.toContainText('Evidence from the study.');await expect(apa).toContainText('Referencia provisional');await expect(apa).not.toContainText('Fuente bibliográfica: Crossref');
+ await page.getByRole('button',{name:'Resultados',exact:true}).click();const quadrants=page.getByRole('region',{name:'Cuadrantes de conceptos',exact:true});await quadrants.getByRole('button',{name:'Coproducción · 1',exact:true}).click();await expect(quadrants).toContainText('Evidence from the study.');await expect(quadrants).toContainText('Página o sección: 12');
+ const [file]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:'Respaldo',exact:true}).click()]);const record=JSON.parse(await fs.readFile(await file.path(),'utf8')).projects[0].records[0];expect(record.conceptHighlights[0]).toMatchObject({label:'Coproducción',dimension:'Interfaz',evidence:'Evidence from the study.',pages:'12'});expect(record.citationMetadata.doi).toBe('10.1234/paper');
+ await page.reload();await page.getByRole('button',{name:'Análisis por objetivos',exact:true}).click();await expect(apa).toContainText('Fuente bibliográfica: Crossref');await expect(concepts).toContainText('Coproducción');
+});
